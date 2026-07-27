@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+
+  postgres:
+    image: postgres:17
+    container_name: andip-postgres
+    restart: always
+
+    environment:
+      POSTGRES_USER: andip
+      POSTGRES_PASSWORD: andip123
+      POSTGRES_DB: andip
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+    container_name: andip-redis
+    restart: always
+
+    ports:
+      - "6379:6379"
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: andip-pgadmin
+    restart: always
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@andip.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+
+    ports:
+      - "5050:80"
+
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
