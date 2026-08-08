@@ -13,7 +13,11 @@ if config.config_file_name is not None:
 
 # Import metadata
 from app.database.base import Base
+
+# Import all models so Alembic can detect them
 from app.models.asset import Asset
+from app.models.discovery_scan import DiscoveryScan
+from app.models.asset_observation import AssetObservation
 
 target_metadata = Base.metadata
 
